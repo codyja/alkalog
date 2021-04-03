@@ -8,19 +8,6 @@ import (
 	"sync"
 )
 
-//const (
-//	dbHost     = "localhost"
-//	dbport     = 5432
-//	dbuser     = "postgres"
-//	dbpassword = "P@ssword1"
-//	dbname   = "aquarium"
-//)
-
-//type PostgresClient struct {
-//	db *pgxpool.Pool
-//}
-
-
 type DbClient struct {
 	Host     string
 	Port     string
@@ -55,7 +42,6 @@ func main() {
 	}
 
 	// read flags
-	//writeToken := flag.Bool("write-token", false, "Retrieve token from Alkatronic's API and write to $HOME/.alkatronic")
 	flagDaemon := flag.Bool("d", false, "Run in Daemon mode to keep polling for new Alkatronic data")
 	flagDays := flag.Int("days", 7, "Number of days worth of records to retrieve. Valid days: 7,30, or 90")
 	flag.Parse()
@@ -68,7 +54,6 @@ func main() {
 	}
 
 	// Initialize new Postgresql client
-	//pg, err := NewPostgresAlkatronic("postgresql://postgres:P@ssword1@localhost:5432/aquarium")
 	pg, err := NewPostgresAlkatronic(dbConn)
 	if err != nil {
 		log.Fatalf("error initializing new Postgresql Client: %s", err )
@@ -87,5 +72,4 @@ func main() {
 		GetAllAlkData(c, pg, *flagDays)
 	}
 
-	//select {}
 }
